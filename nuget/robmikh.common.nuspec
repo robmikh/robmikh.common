@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>Microsoft.Windows.ImplementationLibrary</id>
+    <id>robmikh.common</id>
     <version>0.0.0-SpecifyVersionOnCommandline</version>
     <title>robmikh.common</title>
     <authors>Robert Mikhayelyan</authors>
@@ -12,8 +12,8 @@
     <projectUrl>https://github.com/robmikh/robmikh.common</projectUrl>
   </metadata>
   <files>
-    <file src="LICENSE"/>
-    <file src="robmikh.common\include\**" target="include\" />
-    <file src="nuget\robmikh.common.targets" target="build\native\" />
+    <file src="..\LICENSE"/>
+    <file src="..\robmikh.common\include\**" target="include\" />
+    <file src="robmikh.common.targets" target="build\native\" />
   </files>
 </package>
