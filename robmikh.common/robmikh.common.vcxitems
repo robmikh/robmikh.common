@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{a86528c3-4cec-4be5-92d8-4779307539e8}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\capture.desktop.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.desktop.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.desktop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DesktopWindow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\direct3d11.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />
+  </ItemGroup>
+</Project>

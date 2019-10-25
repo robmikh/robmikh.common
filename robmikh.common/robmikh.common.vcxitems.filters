@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="uwp">
+      <UniqueIdentifier>{6880093d-1e73-4ac6-9f6a-950cca9a7402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="desktop">
+      <UniqueIdentifier>{e986c72a-d0a4-4c3e-b1f4-9982a0bedc01}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.interop.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\direct3d11.interop.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\capture.desktop.interop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.desktop.interop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DesktopWindow.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.interop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.desktop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
