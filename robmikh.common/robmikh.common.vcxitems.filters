@@ -30,7 +30,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DesktopWindow.h">
       <Filter>desktop</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.interop.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.desktop.interop.h">
       <Filter>desktop</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h">

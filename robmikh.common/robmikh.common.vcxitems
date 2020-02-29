@@ -21,7 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DesktopWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\direct3d11.interop.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.desktop.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />
   </ItemGroup>

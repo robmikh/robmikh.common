@@ -35,7 +35,7 @@
 #include "robmikh.common/d3dHelpers.h"
 #include "robmikh.common/direct3d11.interop.h"
 #include "robmikh.common/capture.desktop.interop.h"
-#include "robmikh.common/dispatcherqueue.interop.h"
+#include "robmikh.common/dispatcherqueue.desktop.interop.h"
 #include "robmikh.common/stream.interop.h"
 
 namespace rutil
