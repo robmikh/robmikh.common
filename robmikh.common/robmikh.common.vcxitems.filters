@@ -7,6 +7,9 @@
     <Filter Include="desktop">
       <UniqueIdentifier>{e986c72a-d0a4-4c3e-b1f4-9982a0bedc01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cli">
+      <UniqueIdentifier>{228d8f6f-06dc-4571-a62a-666ba0ccfbb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.interop.h">
@@ -38,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.desktop.h">
       <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\wcliparse.h">
+      <Filter>cli</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
