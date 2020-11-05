@@ -10,7 +10,7 @@ namespace winrt
     using namespace Windows::UI::Composition;
 }
 
-int __stdcall wWinMain(HINSTANCE, HINSTANCE, PSTR, int)
+int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
     winrt::init_apartment();
     
