@@ -29,6 +29,9 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     auto picker = winrt::GraphicsCapturePicker();
     window.InitializeObjectWithWindowHandle(picker);
 
+    auto d3dDevice = rutil::CreateD3DDevice();
+    auto d3dDevice2 = rutil::CreateD3DDevice(D3D11_CREATE_DEVICE_BGRA_SUPPORT | D3D11_CREATE_DEVICE_VIDEO_SUPPORT);
+
     // Message pump
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0))
