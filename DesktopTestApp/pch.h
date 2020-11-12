@@ -37,6 +37,7 @@
 #include "robmikh.common/capture.desktop.interop.h"
 #include "robmikh.common/dispatcherqueue.desktop.interop.h"
 #include "robmikh.common/stream.interop.h"
+#include "robmikh.common/graphics.interop.h"
 
 namespace rutil
 {

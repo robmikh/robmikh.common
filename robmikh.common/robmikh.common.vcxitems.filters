@@ -45,5 +45,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\wcliparse.h">
       <Filter>cli</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\graphics.interop.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
