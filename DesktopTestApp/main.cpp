@@ -79,6 +79,16 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     shapeVisual.Shapes().Append(shape);
     root.Children().InsertAtTop(shapeVisual);
 
+    auto effect = winrt::make_self<rutil::ColorSourceEffect>();
+    effect->Color(winrt::Colors::LightSeaGreen());
+    auto effectFactory = compositor.CreateEffectFactory(effect.as<winrt::Windows::Graphics::Effects::IGraphicsEffect>());
+    auto effectBrush = effectFactory.CreateBrush();
+
+    auto effectVisual = compositor.CreateSpriteVisual();
+    effectVisual.Size({ 200, 200 });
+    effectVisual.Brush(effectBrush);
+    root.Children().InsertAtTop(effectVisual);
+
     // Message pump
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0))
