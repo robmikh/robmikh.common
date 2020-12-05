@@ -46,6 +46,7 @@
 #include "robmikh.common/stream.interop.h"
 #include "robmikh.common/graphics.interop.h"
 #include "robmikh.common/ControlsHelper.h"
+#include "robmikh.common/composition.effects.h"
 
 namespace rutil
 {

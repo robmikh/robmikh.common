@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\capture.desktop.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.desktop.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.effects.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\ControlsHelper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\customBuffers.h" />
