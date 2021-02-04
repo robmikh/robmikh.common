@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="robmikh.common.templates.39cf9ea8-e794-4e94-9ea0-376a2502faf8" Version="1.0" Language="en-US" Publisher="Robert Mikhayelyan" />
+        <DisplayName>Robmikh Common Templates</DisplayName>
+        <Description xml:space="preserve">A collection of templates used to make prototyping easier.</Description>
+        <Icon>robmikh.common.ico</Icon>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[16.0,17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[16.0,17.0)" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="ProjectTemplates" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.ComponentGroup.UWP.VC" Version="[15.0,)" DisplayName="C++ Universal Windows Platform tools" />
+    </Prerequisites>
+</PackageManifest>

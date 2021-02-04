@@ -1,0 +1,39 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Win32 Composition App</Name>
+    <Description>A project for creating Win32 applications using Windows.UI.Composition and C++/WinRT</Description>
+    <ProjectType>VC</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Win32 Composition App</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>robmikh.common.ico</Icon>
+    <PreviewImage>robmikh.common.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="$safeprojectname$.vcxproj" File="Win32CompAppTemplateBase.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.vcxproj.filters">Win32CompAppTemplateBase.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="PropertySheet.props">PropertySheet.props</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="packages.config">packages.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="main.cpp">main.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="pch.h">pch.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="MainWindow.h">MainWindow.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MainWindow.cpp">MainWindow.cpp</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Microsoft.VisualStudio.WinRT.TemplateWizards, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>Microsoft.VisualStudio.WinRT.TemplateWizards.CreateProjectCertificate.Wizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>Microsoft.VisualStudio.Universal.TemplateWizards, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>Microsoft.VisualStudio.Universal.TemplateWizards.PlatformVersion.Wizard</FullClassName>
+  </WizardExtension>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
