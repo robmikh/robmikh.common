@@ -26,5 +26,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\wcliparse.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\WindowInfo.h" />
   </ItemGroup>
 </Project>

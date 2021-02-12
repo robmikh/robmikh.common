@@ -9,6 +9,7 @@ namespace winrt
 namespace util
 {
     using namespace robmikh::common::wcli;
+    using namespace robmikh::common::desktop;
 }
 
 template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
@@ -35,6 +36,11 @@ int wmain(int argc, wchar_t* argv[])
             .Argument(util::Argument(L"--yetanotherargument")
                 .Required(true)
                 .Alias(L"-yaa")
+                .TakesValue(true)))
+        .Command(util::Command(L"find-window", std::function(commands::ParsingValidation::ValidateFindWindowCommand))
+            .Argument(util::Argument(L"--title")
+                .Required(true)
+                .Alias(L"-t")
                 .TakesValue(true)));
 
     commands::Command params;
@@ -52,6 +58,15 @@ int wmain(int argc, wchar_t* argv[])
     {
         [=](commands::SomeCommand const&) { wprintf(L"Some command!\n"); },
         [=](commands::AnotherCommand const& args) { wprintf(L"Another command! %s %s %s", args.SomeArgument.c_str(), args.AnotherArgument.c_str(), args.YetAnotherArgument.c_str()); },
+        [=](commands::FindWindowCommand const& args)
+        {
+            auto windows = util::FindTopLevelWindowsByTitle(args.TitleQuery);
+            wprintf(L"Found %I64i windows...\n", windows.size());
+            for (auto&& window : windows)
+            {
+                wprintf(L"  %s\n", window.Title.c_str());
+            }
+        },
     }, params);
 
     return 0;

@@ -9,10 +9,16 @@ namespace commands
         std::wstring AnotherArgument;
         std::wstring YetAnotherArgument;
     };
+    // Womp womp, the FindWindow macro collides with us here
+    struct FindWindowCommand
+    {
+        std::wstring TitleQuery;
+    };
 
     typedef std::variant<
         SomeCommand,
-        AnotherCommand
+        AnotherCommand,
+        FindWindowCommand
     > Command;
 
     class ParsingValidation
@@ -24,6 +30,13 @@ namespace commands
             result.SomeArgument = matches.ValueOf(L"--someargument");
             result.AnotherArgument = matches.ValueOf(L"--anotherargument");
             result.YetAnotherArgument = matches.ValueOf(L"--yetanotherargument");
+            return commands::Command(result);
+        }
+
+        static commands::Command ValidateFindWindowCommand(robmikh::common::wcli::Matches& matches)
+        {
+            commands::FindWindowCommand result = {};
+            result.TitleQuery = matches.ValueOf(L"--title");
             return commands::Command(result);
         }
 
