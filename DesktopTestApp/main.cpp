@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "CompositionWindow.h"
+#include "ControlsWindow.h"
 
 namespace winrt
 {
@@ -15,6 +16,7 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     winrt::init_apartment();
     
     CompositionWindow::RegisterWindowClass();
+    ControlsWindow::RegisterWindowClass();
 
     auto controller = rutil::CreateDispatcherQueueControllerForCurrentThread();
 
@@ -78,6 +80,9 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     shapeVisual.RelativeSizeAdjustment({ 1, 1 });
     shapeVisual.Shapes().Append(shape);
     root.Children().InsertAtTop(shapeVisual);
+
+    // Seperate window for controls
+    auto controlsWindow = ControlsWindow(L"Controls Window", 800, 600);
 
     // Message pump
     MSG msg;
