@@ -142,4 +142,52 @@ namespace robmikh::common::uwp
 
         return textureCopy;
     }
+
+    inline auto PrepareStagingTexture(winrt::com_ptr<ID3D11Device> const& device, winrt::com_ptr<ID3D11Texture2D> const& texture)
+    {
+        // If our texture is already set up for staging, then use it.
+        // Otherwise, create a staging texture.
+        D3D11_TEXTURE2D_DESC desc = {};
+        texture->GetDesc(&desc);
+        if (desc.Usage == D3D11_USAGE_STAGING && desc.CPUAccessFlags & D3D11_CPU_ACCESS_READ)
+        {
+            return texture;
+        }
+
+        return CopyD3DTexture(device, texture, true);
+    }
+
+    inline auto CopyBytesFromTexture(winrt::com_ptr<ID3D11Texture2D> const& texture, uint32_t subresource = 0)
+    {
+        winrt::com_ptr<ID3D11Device> device;
+        texture->GetDevice(device.put());
+        winrt::com_ptr<ID3D11DeviceContext> context;
+        device->GetImmediateContext(context.put());
+
+        auto stagingTexture = PrepareStagingTexture(device, texture);
+
+        D3D11_TEXTURE2D_DESC desc = {};
+        stagingTexture->GetDesc(&desc);
+        // TODO: Compute bytesPerPixel for other formats
+        WINRT_VERIFY(desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM);
+        auto bytesPerPixel = 4;
+
+        // Copy the bits
+        D3D11_MAPPED_SUBRESOURCE mapped = {};
+        winrt::check_hresult(context->Map(stagingTexture.get(), subresource, D3D11_MAP_READ, 0, &mapped));
+
+        std::vector<byte> bytes(desc.Width * desc.Height * bytesPerPixel, 0);
+        auto source = reinterpret_cast<byte*>(mapped.pData);
+        auto dest = bytes.data();
+        for (auto i = 0; i < (int)desc.Height; i++)
+        {
+            memcpy(dest, source, desc.Width * bytesPerPixel);
+
+            source += mapped.RowPitch;
+            dest += desc.Width * bytesPerPixel;
+        }
+        context->Unmap(stagingTexture.get(), 0);
+
+        return bytes;
+    }
 }
