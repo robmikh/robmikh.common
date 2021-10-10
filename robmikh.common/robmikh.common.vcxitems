@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\dispatcherqueue.desktop.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\graphics.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\mfHelpers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\wcliparse.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\WindowInfo.h" />
