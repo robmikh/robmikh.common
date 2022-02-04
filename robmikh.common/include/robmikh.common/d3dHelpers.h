@@ -78,13 +78,10 @@ namespace robmikh::common::uwp
         return device;
     }
 
-    inline auto CreateD2DFactory()
+    inline auto CreateD2DFactory(D2D1_DEBUG_LEVEL debugLevel = D2D1_DEBUG_LEVEL_NONE)
     {
-        D2D1_FACTORY_OPTIONS options{};
-
-        //#ifdef _DEBUG
-        //	options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
-        //#endif
+        D2D1_FACTORY_OPTIONS options = {};
+        options.debugLevel = debugLevel;
 
         winrt::com_ptr<ID2D1Factory1> factory;
         winrt::check_hresult(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, options, factory.put()));
@@ -157,7 +154,7 @@ namespace robmikh::common::uwp
         return CopyD3DTexture(device, texture, true);
     }
 
-    inline uint32_t
+    inline size_t
         GetBytesPerPixel(DXGI_FORMAT pixelFormat)
     {
         switch (pixelFormat)
@@ -267,15 +264,16 @@ namespace robmikh::common::uwp
         D3D11_MAPPED_SUBRESOURCE mapped = {};
         winrt::check_hresult(context->Map(stagingTexture.get(), subresource, D3D11_MAP_READ, 0, &mapped));
 
-        std::vector<byte> bytes(desc.Width * desc.Height * bytesPerPixel, 0);
+        auto bytesStride = static_cast<size_t>(desc.Width) * bytesPerPixel;
+        std::vector<byte> bytes(bytesStride * static_cast<size_t>(desc.Height), 0);
         auto source = reinterpret_cast<byte*>(mapped.pData);
         auto dest = bytes.data();
         for (auto i = 0; i < (int)desc.Height; i++)
         {
-            memcpy(dest, source, desc.Width * bytesPerPixel);
+            memcpy(dest, source, bytesStride);
 
             source += mapped.RowPitch;
-            dest += desc.Width * bytesPerPixel;
+            dest += bytesStride;
         }
         context->Unmap(stagingTexture.get(), 0);
 
