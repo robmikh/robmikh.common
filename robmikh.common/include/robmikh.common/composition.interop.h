@@ -1,7 +1,10 @@
 #pragma once
+#include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.Graphics.h>
 #include <winrt/Windows.UI.Composition.h>
 #include <windows.ui.composition.interop.h>
 #include <d2d1_1.h>
+#include <dxgi1_6.h>
 
 namespace robmikh::common::uwp
 {
@@ -37,6 +40,16 @@ namespace robmikh::common::uwp
         winrt::check_hresult(surfaceInterop->BeginDraw(nullptr, __uuidof(context), context.put_void(), &offset));
         context->SetTransform(Translation(offset));
         return context;
+    }
+
+    inline auto SurfaceBeginDraw(
+        winrt::Windows::UI::Composition::CompositionDrawingSurface const& surface,
+        POINT* offset)
+    {
+        auto surfaceInterop = surface.as<ABI::Windows::UI::Composition::ICompositionDrawingSurfaceInterop>();
+        winrt::com_ptr<IDXGISurface1> dxgiSurface;
+        winrt::check_hresult(surfaceInterop->BeginDraw(nullptr, __uuidof(IDXGISurface1), dxgiSurface.put_void(), offset));
+        return dxgiSurface;
     }
 
     inline void SurfaceEndDraw(winrt::Windows::UI::Composition::CompositionDrawingSurface const& surface)

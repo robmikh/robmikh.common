@@ -6,6 +6,7 @@ namespace winrt
 {
     using namespace Windows::Foundation;
     using namespace Windows::Foundation::Numerics;
+    using namespace Windows::Graphics;
     using namespace Windows::Graphics::Capture;
     using namespace Windows::Graphics::DirectX;
     using namespace Windows::Graphics::DirectX::Direct3D11;
@@ -14,6 +15,8 @@ namespace winrt
     using namespace Windows::UI;
     using namespace Windows::UI::Composition;
 }
+
+const float CLEARCOLOR[] = { 0.0f, 1.0f, 0.0f, 1.0f }; // RGBA
 
 int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
@@ -36,6 +39,8 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     window.InitializeObjectWithWindowHandle(picker);
 
     auto d3dDevice = rutil::CreateD3DDevice();
+    winrt::com_ptr<ID3D11DeviceContext> d3dContext;
+    d3dDevice->GetImmediateContext(d3dContext.put());
     auto d3dDevice2 = rutil::CreateD3DDevice(D3D11_CREATE_DEVICE_BGRA_SUPPORT | D3D11_CREATE_DEVICE_VIDEO_SUPPORT);
 
     // https://docs.microsoft.com/en-us/windows/win32/direct2d/path-geometries-overview
@@ -97,6 +102,26 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     shapeVisual.Shapes().Append(shape);
     root.Children().InsertAtTop(shapeVisual);
 
+    // Test DXGI surface drawing
+    auto compositionGraphicsDevice = rutil::CreateCompositionGraphicsDevice(compositor, d3dDevice.get());
+    auto surface = compositionGraphicsDevice.CreateDrawingSurface2(winrt::SizeInt32{ 200, 200 }, winrt::DirectXPixelFormat::B8G8R8A8UIntNormalized, winrt::DirectXAlphaMode::Premultiplied);
+    {
+        POINT point = {};
+        auto dxgiSurface = rutil::SurfaceBeginDraw(surface, &point);
+        auto d3dTexture = dxgiSurface.as<ID3D11Texture2D>();
+        winrt::com_ptr<ID3D11RenderTargetView> rtv;
+        winrt::check_hresult(d3dDevice->CreateRenderTargetView(d3dTexture.get(), nullptr, rtv.put()));
+        d3dContext->ClearRenderTargetView(rtv.get(), CLEARCOLOR);
+        rutil::SurfaceEndDraw(surface);
+    }
+
+    auto dxgiVisual = compositor.CreateSpriteVisual();
+    dxgiVisual.RelativeOffsetAdjustment({ 1, 1, 0 });
+    dxgiVisual.Offset({ -200, -200, 0 });
+    dxgiVisual.Size({ 200, 200 });
+    dxgiVisual.Brush(compositor.CreateSurfaceBrush(surface));
+    root.Children().InsertAtTop(dxgiVisual);
+
     // Seperate window for controls
     auto controlsWindow = ControlsWindow(L"Controls Window", 800, 600);
 
@@ -121,8 +146,6 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     session.IsCursorCaptureEnabled(false);
 
     winrt::com_ptr<ID3D11Texture2D> texture;
-    winrt::com_ptr<ID3D11DeviceContext> d3dContext;
-    d3dDevice->GetImmediateContext(d3dContext.put());
     wil::shared_event captureEvent(wil::EventOptions::None);
     framePool.FrameArrived([&texture, d3dDevice, d3dContext, captureEvent, session](auto& pool, auto&)
         {
