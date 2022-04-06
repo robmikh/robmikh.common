@@ -13,4 +13,5 @@ private:
 private:
 	HWND m_someLabel = nullptr;
 	HWND m_someButton = nullptr;
+	HWND m_someEdit = nullptr;
 };

@@ -11,7 +11,8 @@ namespace robmikh::common::desktop::controls
         Label,
         ComboBox,
         Button,
-        CheckBox
+        CheckBox,
+        Edit,
     };
 
     struct StackPanel
@@ -74,6 +75,8 @@ namespace robmikh::common::desktop::controls
                 return WS_TABSTOP | BS_DEFPUSHBUTTON;
             case ControlType::CheckBox:
                 return WS_TABSTOP | BS_AUTOCHECKBOX;
+            case ControlType::Edit:
+                return WS_TABSTOP | WS_BORDER | ES_LEFT;
             default:
                 return 0;
             }
@@ -91,6 +94,8 @@ namespace robmikh::common::desktop::controls
                 return WC_BUTTON;
             case ControlType::CheckBox:
                 return WC_BUTTON;
+            case ControlType::Edit:
+                return L"EDIT";
             default:
                 return 0;
             }
@@ -107,6 +112,8 @@ namespace robmikh::common::desktop::controls
             case ControlType::Button:
                 return currentOffsetY.Step();
             case ControlType::CheckBox:
+                return currentOffsetY.Step();
+            case ControlType::Edit:
                 return currentOffsetY.Step();
             default:
                 return 0;

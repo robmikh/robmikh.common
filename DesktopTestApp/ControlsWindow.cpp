@@ -73,4 +73,5 @@ void ControlsWindow::CreateControls(HINSTANCE instance)
 
     m_someLabel = controls.CreateControl(util::ControlType::Label, L"Some Label");
     m_someButton = controls.CreateControl(util::ControlType::Button, L"Some Button");
+    m_someEdit = controls.CreateControl(util::ControlType::Edit, L"Woop");
 }
