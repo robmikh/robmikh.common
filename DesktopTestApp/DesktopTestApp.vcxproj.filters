@@ -8,9 +8,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="CompositionWindow.cpp" />
+    <ClCompile Include="ControlsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="CompositionWindow.h" />
+    <ClInclude Include="ControlsWindow.h" />
   </ItemGroup>
 </Project>

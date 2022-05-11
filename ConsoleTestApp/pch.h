@@ -5,3 +5,4 @@
 #include <winrt/Windows.Foundation.Collections.h>
 #include <robmikh.common/wcliparse.h>
 #include <robmikh.common/WindowInfo.h>
+#include <robmikh.common/mfHelpers.h>

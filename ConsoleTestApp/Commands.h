@@ -14,11 +14,13 @@ namespace commands
     {
         std::wstring TitleQuery;
     };
+    struct EnumMFTsCommand {};
 
     typedef std::variant<
         SomeCommand,
         AnotherCommand,
-        FindWindowCommand
+        FindWindowCommand,
+        EnumMFTsCommand
     > Command;
 
     class ParsingValidation

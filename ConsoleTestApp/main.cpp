@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Commands.h"
+#include <Mftransform.h>
 
 namespace winrt
 {
@@ -10,6 +11,7 @@ namespace util
 {
     using namespace robmikh::common::wcli;
     using namespace robmikh::common::desktop;
+    using namespace robmikh::common::uwp;
 }
 
 template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
@@ -41,7 +43,8 @@ int wmain(int argc, wchar_t* argv[])
             .Argument(util::Argument(L"--title")
                 .Required(true)
                 .Alias(L"-t")
-                .TakesValue(true)));
+                .TakesValue(true)))
+        .Command(util::Command(L"enum-mfts", commands::Command(commands::EnumMFTsCommand())));
 
     commands::Command params;
     try
@@ -65,6 +68,31 @@ int wmain(int argc, wchar_t* argv[])
             for (auto&& window : windows)
             {
                 wprintf(L"  %s\n", window.Title.c_str());
+            }
+        },
+        [=](commands::EnumMFTsCommand const& args)
+        {
+            MFT_REGISTER_TYPE_INFO outputType = { MFMediaType_Audio, MFAudioFormat_MP3 };
+            auto mfts = util::EnumerateMFTs(
+                MFT_CATEGORY_AUDIO_ENCODER,
+                MFT_ENUM_FLAG_SYNCMFT,
+                nullptr,
+                &outputType);
+
+            wprintf(L"Audio Sync MFTs: \n");
+            for (auto&& mft : mfts)
+            {
+                std::wstring friendlyName;
+                if (auto name = util::GetStringAttribute(mft, MFT_FRIENDLY_NAME_Attribute))
+                {
+                    friendlyName = name.value();
+                }
+                else
+                {
+                    friendlyName = L"Unknown";
+                }
+
+                wprintf(L"  %s\n", friendlyName.c_str());
             }
         },
     }, params);
