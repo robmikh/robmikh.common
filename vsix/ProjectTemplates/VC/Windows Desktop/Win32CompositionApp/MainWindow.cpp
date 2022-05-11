@@ -2,6 +2,7 @@
 #include "MainWindow.h"
 
 const std::wstring MainWindow::ClassName = L"$safeprojectname$.MainWindow";
+std::once_flag MainWindowClassRegistration;
 
 void MainWindow::RegisterWindowClass()
 {
@@ -20,6 +21,8 @@ void MainWindow::RegisterWindowClass()
 MainWindow::MainWindow(std::wstring const& titleString, int width, int height)
 {
     auto instance = winrt::check_pointer(GetModuleHandleW(nullptr));
+
+    std::call_once(MainWindowClassRegistration, []() { RegisterWindowClass(); });
 
     winrt::check_bool(CreateWindowExW(WS_EX_NOREDIRECTIONBITMAP, ClassName.c_str(), titleString.c_str(), WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, instance, this));

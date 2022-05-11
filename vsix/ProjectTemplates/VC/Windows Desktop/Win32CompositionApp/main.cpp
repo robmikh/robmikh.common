@@ -18,9 +18,6 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
     // Initialize COM
     winrt::init_apartment();
-    
-    // Register our window classes
-    MainWindow::RegisterWindowClass();
 
     // Create the DispatcherQueue that the compositor needs to run
     auto controller = util::CreateDispatcherQueueControllerForCurrentThread();
