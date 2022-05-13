@@ -32,11 +32,11 @@ MainWindow::MainWindow(std::wstring const& titleString, int width, int height)
     auto adjustedWidth = rect.right - rect.left;
     auto adjustedHeight = rect.bottom - rect.top;
 
-    winrt::check_bool(CreateWindowExW(WS_EX_NOREDIRECTIONBITMAP, ClassName.c_str(), titleString.c_str(), WS_OVERLAPPEDWINDOW,
+    winrt::check_bool(CreateWindowExW(exStyle, ClassName.c_str(), titleString.c_str(), style,
         CW_USEDEFAULT, CW_USEDEFAULT, adjustedWidth, adjustedHeight, nullptr, nullptr, instance, this));
     WINRT_ASSERT(m_window);
 
-    ShowWindow(m_window, SW_SHOWDEFAULT);
+    ShowWindow(m_window, SW_SHOW);
     UpdateWindow(m_window);
 }
 
