@@ -17,7 +17,7 @@ namespace util
 int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
     // Initialize COM
-    winrt::init_apartment();
+    winrt::init_apartment(winrt::apartment_type::single_threaded);
 
     // Create the DispatcherQueue that the compositor needs to run
     auto controller = util::CreateDispatcherQueueControllerForCurrentThread();
