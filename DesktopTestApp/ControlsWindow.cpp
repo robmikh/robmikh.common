@@ -28,20 +28,47 @@ ControlsWindow::ControlsWindow(std::wstring const& titleString, int width, int h
 {
     auto instance = winrt::check_pointer(GetModuleHandleW(nullptr));
 
-    winrt::check_bool(CreateWindowExW(0, ClassName.c_str(), titleString.c_str(), WS_OVERLAPPEDWINDOW,
+    auto exStyle = 0;
+    auto style = WS_OVERLAPPEDWINDOW;
+
+    // Create our window
+    winrt::check_bool(CreateWindowExW(exStyle, ClassName.c_str(), titleString.c_str(), style,
         CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, instance, this));
     WINRT_ASSERT(m_window);
 
-    ShowWindow(m_window, SW_SHOWDEFAULT);
-    UpdateWindow(m_window);
+    // Get the dpi
+    auto dpi = GetDpiForWindow(m_window);
+
+    // Adjust our window to the desired width/height for the current dpi
+    RECT rect = { 0, 0, width, height };
+    winrt::check_bool(AdjustWindowRectExForDpi(&rect, style, false, exStyle, dpi));
+    auto adjustedWidth = rect.right - rect.left;
+    auto adjustedHeight = rect.bottom - rect.top;
+    winrt::check_bool(SetWindowPos(m_window, nullptr, 0, 0, adjustedWidth, adjustedHeight, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOZORDER));
+
+    // Set a DPI-scaled font
+    m_font = util::GetFontForDpi(dpi);
+    SendMessageW(m_window, WM_SETFONT, reinterpret_cast<WPARAM>(m_font.get()), true);
 
     CreateControls(instance);
+
+    ShowWindow(m_window, SW_SHOW);
+    UpdateWindow(m_window);
 }
 
 LRESULT ControlsWindow::MessageHandler(UINT const message, WPARAM const wparam, LPARAM const lparam)
 {
     switch (message)
     {
+    case WM_DPICHANGED:
+    {
+        auto dpi = GetDpiForWindow(m_window);
+        m_font = util::GetFontForDpi(dpi);
+        SendMessageW(m_window, WM_SETFONT, reinterpret_cast<WPARAM>(m_font.get()), true);
+
+        m_stackPanel->OnDpiChanged(m_font);
+    }
+        return base_type::MessageHandler(message, wparam, lparam);
     case WM_COMMAND:
     {
         auto command = HIWORD(wparam);
@@ -64,14 +91,14 @@ LRESULT ControlsWindow::MessageHandler(UINT const message, WPARAM const wparam, 
     default:
         return base_type::MessageHandler(message, wparam, lparam);
     }
-    return base_type::MessageHandler(message, wparam, lparam);
+    return 0;
 }
 
 void ControlsWindow::CreateControls(HINSTANCE instance)
 {
-    auto controls = util::StackPanel(m_window, instance, 10, 10, 40, 200, 30);
+    m_stackPanel = std::make_unique<util::StackPanel>(m_window, instance, m_font, 10, 10, 40, 200, 30);
 
-    m_someLabel = controls.CreateControl(util::ControlType::Label, L"Some Label");
-    m_someButton = controls.CreateControl(util::ControlType::Button, L"Some Button");
-    m_someEdit = controls.CreateControl(util::ControlType::Edit, L"Woop");
+    m_someLabel = m_stackPanel->CreateControl(util::ControlType::Label, L"Some Label");
+    m_someButton = m_stackPanel->CreateControl(util::ControlType::Button, L"Some Button");
+    m_someEdit = m_stackPanel->CreateControl(util::ControlType::Edit, L"Woop");
 }

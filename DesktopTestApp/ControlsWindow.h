@@ -11,6 +11,8 @@ private:
 	void CreateControls(HINSTANCE instance);
 
 private:
+	std::unique_ptr<robmikh::common::desktop::controls::StackPanel> m_stackPanel;
+	wil::shared_hfont m_font;
 	HWND m_someLabel = nullptr;
 	HWND m_someButton = nullptr;
 	HWND m_someEdit = nullptr;

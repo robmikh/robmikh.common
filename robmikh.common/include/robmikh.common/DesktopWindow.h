@@ -40,13 +40,26 @@ namespace robmikh::common::desktop
 
         LRESULT MessageHandler(UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept
         {
-            if (WM_DESTROY == message)
+            switch (message)
             {
+            case WM_DESTROY:
                 PostQuitMessage(0);
                 return 0;
+            case WM_DPICHANGED:
+            {
+                auto rect = reinterpret_cast<const RECT*>(lparam);
+                SetWindowPos(m_window,
+                    nullptr,
+                    rect->left,
+                    rect->top,
+                    rect->right - rect->left,
+                    rect->bottom - rect->top,
+                    SWP_NOZORDER | SWP_NOACTIVATE);
             }
-
-            return DefWindowProc(m_window, message, wparam, lparam);
+                return 0;
+            default:
+                return DefWindowProcW(m_window, message, wparam, lparam);
+            }
         }
 
         winrt::Windows::UI::Composition::Desktop::DesktopWindowTarget CreateWindowTarget(winrt::Windows::UI::Composition::Compositor const& compositor)

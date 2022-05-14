@@ -20,6 +20,7 @@ const float CLEARCOLOR[] = { 0.0f, 1.0f, 0.0f, 1.0f }; // RGBA
 
 int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
 {
+    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
     winrt::init_apartment();
     
     CompositionWindow::RegisterWindowClass();
