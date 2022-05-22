@@ -57,5 +57,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\mfHelpers.h">
       <Filter>uwp</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DisplayInfo.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\shellHelpers.desktop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
