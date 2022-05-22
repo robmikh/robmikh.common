@@ -117,9 +117,9 @@ namespace robmikh::common::desktop
         }
     }
 
-    struct Display
+    struct DisplayInfo
     {
-        static std::vector<Display> GetAllDisplays()
+        static std::vector<DisplayInfo> GetAllDisplays()
         {
             // Get all the display handles
             std::vector<HMONITOR> displayHandles;
@@ -138,7 +138,7 @@ namespace robmikh::common::desktop
             auto namesToHDRInfos = impl::BuildDeviceNameToHDRInfoMap();
             
             // Go through each display and find the matching hdr info
-            std::vector<Display> displays;
+            std::vector<DisplayInfo> displays;
             for (auto&& displayHandle : displayHandles)
             {
                 // Get the monitor rect and device name.
@@ -151,12 +151,12 @@ namespace robmikh::common::desktop
                 // You may want to assume a display isn't HDR if you can't find its information.
                 auto hdrInfo = namesToHDRInfos[name];
                 auto maxLuminance = maxLuminances[displayHandle];
-                displays.push_back(Display(displayHandle, monitorInfo.rcMonitor, name, hdrInfo.IsHDR, hdrInfo.SDRWhiteLevelInNits, maxLuminance));
+                displays.push_back(DisplayInfo(displayHandle, monitorInfo.rcMonitor, name, hdrInfo.IsHDR, hdrInfo.SDRWhiteLevelInNits, maxLuminance));
             }
 
             return displays;
         }
-        Display(HMONITOR handle, RECT rect, std::wstring const& name, bool isHDR, float sdrWhiteLevelInNits, float maxLuminance)
+        DisplayInfo(HMONITOR handle, RECT rect, std::wstring const& name, bool isHDR, float sdrWhiteLevelInNits, float maxLuminance)
         {
             m_handle = handle;
             m_rect = rect;
@@ -174,8 +174,8 @@ namespace robmikh::common::desktop
         float SDRWhiteLevelInNits() const { return m_sdrWhiteLevelInNits; }
         float MaxLuminance() const { return m_maxLuminance; }
 
-        bool operator==(const Display& display) { return m_handle == display.m_handle; }
-        bool operator!=(const Display& display) { return !(*this == display); }
+        bool operator==(const DisplayInfo& display) { return m_handle == display.m_handle; }
+        bool operator!=(const DisplayInfo& display) { return !(*this == display); }
 
     private:
         HMONITOR m_handle = nullptr;

@@ -135,7 +135,6 @@ namespace robmikh::common::desktop
     private:
         void RegisterTrayIcon(HWND window, HICON icon, uint32_t message, uint32_t id, std::wstring const& tip)
         {
-            auto instance = winrt::check_pointer(GetModuleHandleW(nullptr));
             NOTIFYICONDATAW trayIconDesc = {};
             trayIconDesc.cbSize = sizeof(trayIconDesc);
             trayIconDesc.hWnd = window;
