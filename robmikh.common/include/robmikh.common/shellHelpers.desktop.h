@@ -166,7 +166,7 @@ namespace robmikh::common::desktop
     {
         HotKey(uint32_t modifiers, uint32_t key)
         {
-            m_id = s_hotKeyId.fetch_add(1) + 1;
+            m_id = GetNextId();
             winrt::check_bool(RegisterHotKey(nullptr, m_id, modifiers, key));
         }
 
@@ -176,7 +176,13 @@ namespace robmikh::common::desktop
         }
 
     private:
-        static std::atomic<int32_t> s_hotKeyId;
+        static int32_t GetNextId()
+        {
+            static std::atomic<int32_t> hotKeyId = 0;
+            return hotKeyId.fetch_add(1) + 1;
+        }
+
+    private:
         int32_t m_id = 0;
     };
 }

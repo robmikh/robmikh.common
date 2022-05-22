@@ -9,7 +9,7 @@ namespace robmikh::common::desktop
 {
     namespace impl
     {
-        std::map<HMONITOR, float> BuildDisplayHandleToMaxLuminanceMap()
+        inline std::map<HMONITOR, float> BuildDisplayHandleToMaxLuminanceMap()
         {
             std::map<HMONITOR, float> maxLuminances;
 
@@ -45,7 +45,7 @@ namespace robmikh::common::desktop
             return maxLuminances;
         }
 
-        std::vector<DISPLAYCONFIG_PATH_INFO> GetDisplayConfigPathInfos()
+        inline std::vector<DISPLAYCONFIG_PATH_INFO> GetDisplayConfigPathInfos()
         {
             uint32_t numPaths = 0;
             uint32_t numModes = 0;
@@ -73,7 +73,7 @@ namespace robmikh::common::desktop
             float SDRWhiteLevelInNits = 0.0f;
         };
 
-        std::map<std::wstring, DisplayHDRInfo> BuildDeviceNameToHDRInfoMap()
+        inline std::map<std::wstring, DisplayHDRInfo> BuildDeviceNameToHDRInfoMap()
         {
             auto pathInfos = GetDisplayConfigPathInfos();
             std::map<std::wstring, DisplayHDRInfo> namesToHDRInfos;
