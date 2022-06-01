@@ -18,6 +18,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.desktop.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\ControlsHelper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\customBuffers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.desktop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\d3dHelpers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DesktopWindow.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\DisplayInfo.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\graphics.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\hwnd.interop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\imaging.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\mfHelpers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\shellHelpers.desktop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />

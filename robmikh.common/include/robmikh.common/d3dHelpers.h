@@ -279,4 +279,37 @@ namespace robmikh::common::uwp
 
         return bytes;
     }
+
+    inline auto CreateTextureFromRawBytes(
+        winrt::com_ptr<ID3D11Device> const& d3dDevice,
+        uint8_t const* bytes,
+        uint32_t width,
+        uint32_t height,
+        DXGI_FORMAT pixelFormat,
+        bool renderTarget = false)
+    {
+        uint32_t bindFlags = D3D11_BIND_SHADER_RESOURCE;
+        if (renderTarget)
+        {
+            bindFlags |= D3D11_BIND_RENDER_TARGET;
+        }
+
+        D3D11_TEXTURE2D_DESC desc = {};
+        desc.Width = width;
+        desc.Height = height;
+        desc.MipLevels = 1;
+        desc.ArraySize = 1;
+        desc.Format = pixelFormat;
+        desc.BindFlags = bindFlags;
+        desc.SampleDesc.Count = 1;
+
+        D3D11_SUBRESOURCE_DATA initData = {};
+        initData.pSysMem = bytes;
+        initData.SysMemPitch = static_cast<uint32_t>(width * GetBytesPerPixel(pixelFormat));
+
+        winrt::com_ptr<ID3D11Texture2D> texture;
+        winrt::check_hresult(d3dDevice->CreateTexture2D(&desc, &initData, texture.put()));
+
+        return texture;
+    }
 }
