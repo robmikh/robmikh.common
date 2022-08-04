@@ -69,5 +69,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\imaging.h">
       <Filter>uwp</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\storage.desktop.h">
+      <Filter>desktop</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,6 +30,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\imaging.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\mfHelpers.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\shellHelpers.desktop.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\storage.desktop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\stream.interop.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\wcliparse.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\WindowInfo.h" />

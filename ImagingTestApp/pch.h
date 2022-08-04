@@ -52,3 +52,4 @@
 #include <robmikh.common/capture.desktop.interop.h>
 #include <robmikh.common/DesktopWindow.h>
 #include <robmikh.common/imaging.h>
+#include <robmikh.common/storage.desktop.h>
