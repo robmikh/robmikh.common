@@ -1,5 +1,6 @@
 #pragma once
 #include "composition.interop.h"
+#include <wincodec.h>
 
 namespace robmikh::common::uwp
 {
