@@ -1,32 +1,10 @@
 #pragma once
-#include "composition.interop.h"
+#include <winrt/base.h>
+#include <d3d11_4.h>
+#include <dxgi1_2.h>
 
 namespace robmikh::common::uwp
 {
-    struct SurfaceContext
-    {
-    public:
-        SurfaceContext(std::nullptr_t) {}
-        SurfaceContext(
-            winrt::Windows::UI::Composition::CompositionDrawingSurface surface)
-        {
-            m_surface = surface;
-            m_d2dContext = SurfaceBeginDraw(m_surface);
-        }
-        ~SurfaceContext()
-        {
-            SurfaceEndDraw(m_surface);
-            m_d2dContext = nullptr;
-            m_surface = nullptr;
-        }
-
-        winrt::com_ptr<ID2D1DeviceContext> GetDeviceContext() { return m_d2dContext; }
-
-    private:
-        winrt::com_ptr<ID2D1DeviceContext> m_d2dContext;
-        winrt::Windows::UI::Composition::CompositionDrawingSurface m_surface{ nullptr };
-    };
-
     struct D3D11DeviceLock
     {
     public:
@@ -45,19 +23,7 @@ namespace robmikh::common::uwp
         winrt::com_ptr<ID3D11Multithread> m_multithread;
     };
 
-    inline auto CreateWICFactory()
-    {
-        return winrt::create_instance<IWICImagingFactory2>(CLSID_WICImagingFactory2);
-    }
-
-    inline auto CreateD2DDevice(winrt::com_ptr<ID2D1Factory1> const& factory, winrt::com_ptr<ID3D11Device> const& device)
-    {
-        winrt::com_ptr<ID2D1Device> result;
-        winrt::check_hresult(factory->CreateDevice(device.as<IDXGIDevice>().get(), result.put()));
-        return result;
-    }
-
-    inline auto CreateD3DDevice(D3D_DRIVER_TYPE const type, UINT flags, winrt::com_ptr<ID3D11Device>& device)
+    inline auto CreateD3D11Device(D3D_DRIVER_TYPE const type, UINT flags, winrt::com_ptr<ID3D11Device>& device)
     {
         WINRT_ASSERT(!device);
 
@@ -65,27 +31,17 @@ namespace robmikh::common::uwp
             nullptr, nullptr);
     }
 
-    inline auto CreateD3DDevice(UINT flags = D3D11_CREATE_DEVICE_BGRA_SUPPORT)
+    inline auto CreateD3D11Device(UINT flags = D3D11_CREATE_DEVICE_BGRA_SUPPORT)
     {
         winrt::com_ptr<ID3D11Device> device;
-        HRESULT hr = CreateD3DDevice(D3D_DRIVER_TYPE_HARDWARE, flags, device);
+        HRESULT hr = CreateD3D11Device(D3D_DRIVER_TYPE_HARDWARE, flags, device);
         if (DXGI_ERROR_UNSUPPORTED == hr)
         {
-            hr = CreateD3DDevice(D3D_DRIVER_TYPE_WARP, flags, device);
+            hr = CreateD3D11Device(D3D_DRIVER_TYPE_WARP, flags, device);
         }
 
         winrt::check_hresult(hr);
         return device;
-    }
-
-    inline auto CreateD2DFactory(D2D1_DEBUG_LEVEL debugLevel = D2D1_DEBUG_LEVEL_NONE)
-    {
-        D2D1_FACTORY_OPTIONS options = {};
-        options.debugLevel = debugLevel;
-
-        winrt::com_ptr<ID2D1Factory1> factory;
-        winrt::check_hresult(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, options, factory.put()));
-        return factory;
     }
 
     inline auto CreateDXGISwapChain(winrt::com_ptr<ID3D11Device> const& device, const DXGI_SWAP_CHAIN_DESC1* desc)

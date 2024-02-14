@@ -39,7 +39,8 @@
 // Common
 #include "robmikh.common/composition.interop.h"
 #include "robmikh.common/DesktopWindow.h"
-#include "robmikh.common/d3dHelpers.h"
+#include "robmikh.common/d3d11Helpers.h"
+#include "robmikh.common/d2dHelpers.h"
 #include "robmikh.common/direct3d11.interop.h"
 #include "robmikh.common/capture.desktop.interop.h"
 #include "robmikh.common/dispatcherqueue.desktop.interop.h"

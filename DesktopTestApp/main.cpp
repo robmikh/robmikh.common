@@ -39,10 +39,10 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     auto picker = winrt::GraphicsCapturePicker();
     window.InitializeObjectWithWindowHandle(picker);
 
-    auto d3dDevice = rutil::CreateD3DDevice();
+    auto d3dDevice = rutil::CreateD3D11Device();
     winrt::com_ptr<ID3D11DeviceContext> d3dContext;
     d3dDevice->GetImmediateContext(d3dContext.put());
-    auto d3dDevice2 = rutil::CreateD3DDevice(D3D11_CREATE_DEVICE_BGRA_SUPPORT | D3D11_CREATE_DEVICE_VIDEO_SUPPORT);
+    auto d3dDevice2 = rutil::CreateD3D11Device(D3D11_CREATE_DEVICE_BGRA_SUPPORT | D3D11_CREATE_DEVICE_VIDEO_SUPPORT);
 
     // https://docs.microsoft.com/en-us/windows/win32/direct2d/path-geometries-overview
     auto d2dFactory = rutil::CreateD2DFactory();
