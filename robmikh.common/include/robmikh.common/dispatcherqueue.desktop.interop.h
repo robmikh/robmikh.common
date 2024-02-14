@@ -6,13 +6,13 @@ namespace robmikh::common::desktop
 {
     namespace impl
     {
-        inline winrt::fire_and_forget ShutdownAndThenPostQuitMessage(winrt::Windows::System::DispatcherQueueController const& controller, int exitCode)
+        inline void ShutdownAndThenPostQuitMessage(winrt::Windows::System::DispatcherQueueController const& controller, int exitCode)
         {
-            auto queue = controller.DispatcherQueue();
-            co_await controller.ShutdownQueueAsync();
-            co_await queue;
-            PostQuitMessage(exitCode);
-            co_return;
+            auto action = controller.ShutdownQueueAsync();
+            action.Completed([exitCode](auto&&, auto&&)
+                {
+                    PostQuitMessage(exitCode);
+                });
         }
     }
 
