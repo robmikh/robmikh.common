@@ -45,7 +45,7 @@ namespace robmikh::common::uwp
         HRESULT hr = attributes->GetStringLength(attributeGuid, &resultLength);
         if (SUCCEEDED(hr))
         {
-            std::wstring result((size_t)resultLength + 1, L' ');
+            std::wstring result(static_cast<size_t>(resultLength) + 1, L' ');
             winrt::check_hresult(attributes->GetString(attributeGuid, result.data(), (uint32_t)result.size(), &resultLength));
             result.resize(resultLength);
             return std::optional(std::move(result));
