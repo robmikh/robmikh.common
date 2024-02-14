@@ -5,7 +5,7 @@
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Graphics.Imaging.h>
 #include <winrt/Windows.Storage.Streams.h>
-#include "d3dHelpers.h"
+#include "d3d11Helpers.h"
 #include "customBuffers.h"
 
 namespace robmikh::common::uwp

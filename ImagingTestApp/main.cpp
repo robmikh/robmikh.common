@@ -37,7 +37,7 @@ int __stdcall WinMain(HINSTANCE, HINSTANCE, PSTR, int)
     winrt::init_apartment(winrt::apartment_type::multi_threaded);
 
     // Init D3D and D2D
-    auto d3dDevice = util::CreateD3DDevice();
+    auto d3dDevice = util::CreateD3D11Device();
     auto d2dFactory = util::CreateD2DFactory();
     auto d2dDevice = util::CreateD2DDevice(d2dFactory, d3dDevice);
     winrt::com_ptr<ID2D1DeviceContext> d2dContext;
