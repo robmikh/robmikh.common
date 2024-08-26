@@ -15,4 +15,7 @@
     <ClInclude Include="CompositionWindow.h" />
     <ClInclude Include="ControlsWindow.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
+  </ItemGroup>
 </Project>

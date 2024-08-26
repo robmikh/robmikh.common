@@ -1,10 +1,10 @@
 #pragma once
-#include <future>
 #include <memorybuffer.h>
 #include <d3d11.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Graphics.Imaging.h>
 #include <winrt/Windows.Storage.Streams.h>
+#include <wil/coroutine.h>
 #include "d3d11Helpers.h"
 #include "customBuffers.h"
 
@@ -47,7 +47,7 @@ namespace robmikh::common::uwp
         }
     }
 
-    inline std::future<winrt::com_ptr<ID3D11Texture2D>> LoadTextureFromStreamAsync(
+    inline wil::task<winrt::com_ptr<ID3D11Texture2D>> LoadTextureFromStreamAsync(
         winrt::Windows::Storage::Streams::IRandomAccessStream const& stream,
         winrt::com_ptr<ID3D11Device> d3dDevice,
         bool renderTarget = false,
