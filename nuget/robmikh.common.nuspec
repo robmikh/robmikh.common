@@ -10,10 +10,12 @@
     <tags>windows utility native rutil robmikh</tags>
     <license type="file">LICENSE</license>
     <projectUrl>https://github.com/robmikh/robmikh.common</projectUrl>
+    <readme>docs\README.md</readme>
   </metadata>
   <files>
     <file src="..\LICENSE"/>
     <file src="..\robmikh.common\include\**" target="include\" />
     <file src="robmikh.common.targets" target="build\native\" />
+    <file src="..\README.md" target="docs\" />
   </files>
 </package>
