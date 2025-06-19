@@ -72,5 +72,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\storage.desktop.h">
       <Filter>desktop</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)include\robmikh.common\composition.effects.h">
+      <Filter>uwp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
