@@ -1,0 +1,15 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <Name>No Redirection Bitmap Window</Name>
+    <Description>A window that uses WS_EX_NOREDIRECTIONBITMAP, suitable for use with DirectComposition or Windows.UI.Composition.</Description>
+    <ProjectType>VC</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <DefaultName>MyWindow</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <Icon>robmikh.common.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$safeitemname$.h">NoRedirectionBitmapWindow.h</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$safeitemname$.cpp">NoRedirectionBitmapWindow.cpp</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

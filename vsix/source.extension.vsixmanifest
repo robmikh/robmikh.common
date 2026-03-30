@@ -40,6 +40,7 @@
     </Dependencies>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="ProjectTemplates" />
+        <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="ItemTemplates" />
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
